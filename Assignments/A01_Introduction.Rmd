@@ -1,6 +1,6 @@
 ---
 title: "Assignment 1: Introduction"
-author: "Student Name"
+author: "Nagarajan Vaidya Subramanian"
 output: pdf_document
 geometry: margin=2.54cm
 ---
@@ -39,22 +39,22 @@ Enter answers to the questions just below the >Answer: prompt.
 
 1. What are your previous experiences with data analytics, R, and Git? Include both formal and informal training.
 
-> Answer: 
+> Answer: My first experience with R was during my undergrad Statistics class, but that was a few years ago. As an MEM student, I took ENV 710 Applied Statistical Modelling last semester which is the first time I used R Studio. That class, along with ENV 716 Energy Modelling, were my first formal training in the field of data analytics (broadly). As for Git, I'm familiar with what it is used for and who uses it but have not used it myself till now. Excited to get formal training in these skills and tools and for my first formal training in the field of Data Analytics itself!
 
 2. Are there any components of the course about which you feel confident?
 
-> Answer: 
+> Answer: About half of the modules of this course overlap with what was covered in ENV 710 (sourcing data, data wrangling, creating models, interpretation). So I feel confident about these more technical aspects. I look forward to learning to use these skills for the purpose of analysing data in a broader context, and hopefully, in energy-related contexts too.
 
 3. Are there any components of the course about which you feel apprehensive?
 
-> Answer: 
+> Answer: My experience with R Studio showed me that the tool can sometimes behave unpredictably and throw errors that are challenging to resolve. ALso, learning to go beyond the context of the data itself and putting in a big picture, quantifying and interpreting the results are some aspects of this subject that I need to learn to do better.
 
 
 ## 3) GitHub
 
 Provide a link below to your forked course repository in GitHub. Make sure you have pulled all recent changes from the course repository and that you have updated your course README file, committed those changes, and pushed them to your GitHub account. 
 
-> Answer: 
+> Answer: https://github.com/nagarajan-vs/EDA-Spring2023
 
 ## 4) Knitting
 When you have completed this document, click the `knit` button.This should produce a PDF copy of your markdown document. Submit this PDF to Sakai. 

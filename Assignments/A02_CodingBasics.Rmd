@@ -1,6 +1,6 @@
 ---
 title: "Assignment 2: Coding Basics"
-author: "Student Name"
+author: "Nagarajan Vaidya Subramanian"
 output: pdf_document
 geometry: margin=2.54cm
 editor_options: 
@@ -31,12 +31,15 @@ This exercise accompanies the lessons in Environmental Data Analytics on coding 
 4.  Insert comments in your code to describe what you are doing.
 
 ```{r}
-#1. 
-
-#2. 
-
-#3. 
-
+#1. Using the seq function from the base package to generate a sequence of numbers from 1 to 100 in increments of 4
+num_seq <- seq(1, 100, by=4)
+#2. calculating the mean and median of this sequence
+mean.num_seq <- mean(num_seq)
+median.num_seq <- median(num_seq)
+#3. Using an if condition to check whether mean is greater than the median
+if (mean.num_seq > median.num_seq) {
+  print("Mean of the sequence is greater than the median")} else {
+  print("Mean of the sequence is not greater than the median")}
 ```
 
 ## Basics Day 2
@@ -50,7 +53,8 @@ This exercise accompanies the lessons in Environmental Data Analytics on coding 
 8.  Label the columns of your data frame with informative titles.
 
 ```{r}
-
+student_names <- c("a", "b", "c", "d")
+test_scores <- 
 ```
 
 9.  QUESTION: How is this data frame different from a matrix?
