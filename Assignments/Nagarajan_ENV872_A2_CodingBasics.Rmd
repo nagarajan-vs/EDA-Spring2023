@@ -1,0 +1,105 @@
+---
+title: 'Assignment 2: Coding Basics'
+author: "Nagarajan Vaidya Subramanian"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
+geometry: margin=2.54cm
+editor_options:
+  chunk_output_type: console
+---
+
+## OVERVIEW
+
+This exercise accompanies the lessons in Environmental Data Analytics on coding basics.
+
+## Directions
+
+1.  Rename this file `<FirstLast>_A02_CodingBasics.Rmd` (replacing `<FirstLast>` with your first and last name).
+2.  Change "Student Name" on line 3 (above) with your name.
+3.  Work through the steps, **creating code and output** that fulfill each instruction.
+4.  Be sure to **answer the questions** in this assignment document.
+5.  When you have completed the assignment, **Knit** the text and code into a single PDF file.
+6.  After Knitting, submit the completed exercise (PDF file) to Sakai.
+
+## Basics Day 1
+
+1.  Generate a sequence of numbers from one to 100, increasing by fours. Assign this sequence a name.
+
+2.  Compute the mean and median of this sequence.
+
+3.  Ask R to determine whether the mean is greater than the median.
+
+4.  Insert comments in your code to describe what you are doing.
+
+```{r}
+#1. Using the seq function from the base package to generate a sequence of numbers from 1 to 100 in increments of 4
+num_seq <- seq(1, 100, by=4)
+#2. calculating the mean and median of this sequence
+mean.num_seq <- mean(num_seq)
+mean.num_seq
+median.num_seq <- median(num_seq)
+median.num_seq
+
+#3. Using an if condition to check whether mean is greater than the median
+mean.num_seq > median.num_seq
+#if (mean.num_seq > median.num_seq) {
+#  print("Mean of the sequence is greater than the median")} else {
+#  print("Mean of the sequence is not greater than the median")}
+```
+
+## Basics Day 2
+
+5.  Create a series of vectors, each with four components, consisting of (a) names of students, (b) test scores out of a total 100 points, and (c) whether or not they have passed the test (TRUE or FALSE) with a passing grade of 50.
+
+6.  Label each vector with a comment on what type of vector it is.
+
+7.  Combine each of the vectors into a data frame. Assign the data frame an informative name.
+
+8.  Label the columns of your data frame with informative titles.
+
+```{r}
+student_names <- c("a", "b", "c", "d") #vector containing 4 names of students
+test_scores <- c("54", "95", "12", "70") #vector containing test scores (random numbers)
+test_grades <- test_scores>=50 #vector containing grades of the 4 students based on their test scores
+marksheet.df <- data.frame(student_names, test_scores, test_grades) #creating a data frame from the three vectors we created
+colnames(marksheet.df) <- c("names", "scores", "grades") #changing the column names to something meaningfull but easier to write than the vector names themselves
+```
+
+9.  QUESTION: How is this data frame different from a matrix?
+
+> Answer: A matrix is a simple collection of numbers arranged across rows and columns. Whereas a data frame is a more sophisticated data structure that can store a mix of data types along with column/row names.
+
+10. Create a function with an if/else statement. Your function should take a **vector** of test scores and print (not return) whether a given test score is a passing grade of 50 or above (TRUE or FALSE). You will need to choose either the `if` and `else` statements or the `ifelse` statement.
+
+11. Apply your function to the vector with test scores that you created in number 5.
+
+```{r}
+passingGrade <- 50 #variable to store the passing score of this test
+passingTest <- function(vect, pass, print=TRUE) {
+  for (i in 1:length(vect)) {
+    if (vect[i]>=pass) {
+      print(paste(vect[i], "is a passing grade"))
+    } else {
+      print(paste(vect[i], "is not passing grade"))
+    }
+  }
+}
+passingTest(test_scores, passingGrade)
+```
+
+```{r}
+passingTest2 <- function(vect, pass, print=TRUE) {
+  for (i in 1:length(vect)) {
+    ifelse (vect[i]>=pass, print(paste(vect[i], "is a passing grade")), print(paste(vect[i], "is not passing grade")))
+  }
+}
+passingTest2(test_scores, passingGrade)
+```
+
+
+12. QUESTION: Which option of `if` and `else` vs. `ifelse` worked? Why?
+
+> Answer: I tried both, and got the same result (as we can see above)
