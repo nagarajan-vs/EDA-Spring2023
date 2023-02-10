@@ -1,10 +1,12 @@
 ---
-title: "Assignment 3: Data Exploration"
+title: 'Assignment 3: Data Exploration'
 author: "Nagarajan Vaidya Subramanian"
 date: "Spring 2023"
-output: pdf_document
+output:
+  word_document: default
+  pdf_document: default
 geometry: margin=2.54cm
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -52,8 +54,8 @@ library(lubridate)
 
 ```{r loading_datasets}
 #reading in the data sets for litter and woody debris and saving them to variables called neonics and litter
-neonics <- read.csv("X:/ENV 872 Environmental Data Analytics/Git_codes/EDA-Spring2023/Data/Raw/ECOTOX_Neonicotinoids_Insects_raw.csv", stringsAsFactors = TRUE)
-litter <- read.csv("X:/ENV 872 Environmental Data Analytics/Git_codes/EDA-Spring2023/Data/Raw/NEON_NIWO_Litter_massdata_2018-08_raw.csv", stringsAsFactors = TRUE)
+neonics <- read.csv("./Data/Raw/ECOTOX_Neonicotinoids_Insects_raw.csv", stringsAsFactors = TRUE)
+litter <- read.csv("./Data/Raw/NEON_NIWO_Litter_massdata_2018-08_raw.csv", stringsAsFactors = TRUE)
 str(neonics) #checking the data structure to ensure that the strings have been read in as factors
 str(litter)
 ```
