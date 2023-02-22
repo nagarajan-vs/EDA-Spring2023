@@ -44,7 +44,7 @@ knitr::opts_chunk$set(tidy.opts=list(width.cutoff=80), tidy=TRUE)
 ```
 
 ```{r loading_libraries,  message = FALSE}
-setwd("X:/ENV 872 Environmental Data Analytics/Git_codes/EDA-Spring2023/Assignments")
+setwd("X:/ENV 872 Environmental Data Analytics/Git_codes/EDA-Spring2023/")
 getwd()
 #install.packages("tidyverse") #command to install the two packages which needs to be run only once.
 #install.packages("lubridate")
@@ -69,14 +69,16 @@ str(litter)
 
 3.  The Niwot Ridge litter and woody debris dataset was collected from the National Ecological Observatory Network, which collectively includes 81 aquatic and terrestrial sites across 20 ecoclimatic domains. 32 of these sites sample forest litter and woody debris, and we will focus on the Niwot Ridge long-term ecological research (LTER) station in Colorado. Why might we be interested in studying litter and woody debris that falls to the ground in forests? Feel free to do a brief internet search if you feel you need more background information.
 
-> Answer:
+> Answer: litter and woody debris are comprised primarily of twigs, branches, leaves and other organic matter from plants. They play an important role in soil formation (by serving as detritus for organisms to feed on) and in the nutrien cycle in the ecosystem. when litter and woody debris is deposited on the ground, it essentially traps (sequesters) carbon from the air in the ground. Studying litter and woody debris gives us an estimate of the role that forests play in sequestering carbon at the scale of ecosystems. This can have a significant impact on the carbon cycle of the world as a whole. Further, the rate of deposition of debris can be affected by disease and pests, so studying that serves as an indicator of the overall health of the forest. 
 
 4.  How is litter and woody debris sampled as part of the NEON network? Read the NEON_Litterfall_UserGuide.pdf document to learn more. List three pieces of salient information about the sampling methods here:
 
 > Answer: 
- 1.
- 2.
- 3. 
+ 1. As part of the NEON network, litter and woody debris is sampled spatially and temporally.
+ 2. Salient features:
+    a. In sites with forested tower airsheds, the litter sampling takes place in 20x 40m x 40m plots. In sites with low-statured vegetation over the tower airsheds, litter sampling is done in 4x 40m x 40m tower plots along with 26x 20m x 20m plots. This is done to accommodate co-located soil sampling
+    b. In places with deciduous vegetation, the sampling in elevated litter traps may be paused for the duration of winter
+    c. Therefore, The target sampling frequency for elevated traps varies by vegetation present at the site.
 
 ## Obtain basic summaries of your data (Neonics)
 

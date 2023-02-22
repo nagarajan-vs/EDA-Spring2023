@@ -1,13 +1,13 @@
 ---
 title: "Assignment 5: Data Visualization"
-author: "Student Name"
+author: "Nagarajan Vaidya Subramanian"
 date: "Spring 2023"
 output: pdf_document
 geometry: margin=2.54cm
 fig_height: 3
 fig_width: 4
 editor_options: 
-  chunk_output_type: console
+  chunk_output_type: inline
 ---
 
 ## OVERVIEW
@@ -32,8 +32,28 @@ This exercise accompanies the lessons in Environmental Data Analytics on Data Vi
 
 ```{r initialize project}
 #1 
+library(tidyverse)
+library(lubridate)
+#install.packages("here")
+library(here)
+#install.packages("cowplot")
+library(cowplot)
+
+getwd()
+
+processedDir = "./Data/Processed"
+
+ntl_litter <- read.csv(here(processedDir, "NTL-LTER_Lake_Chemistry_Nutrients_PeterPaul_Processed.csv"))
+litter <- read.csv(here(processedDir, "NEON_NIWO_Litter_mass_trap_Processed.csv"))
 
 #2 
+#checking the format in which different fields are saved.
+glimpse(ntl_litter)
+print("***********************")
+glimpse(litter)
+
+#converting the date column of the litter dataframe to date because it has been read as characters in the yyyy-mm-dd format
+litter$collectDate <- ymd(litter$collectDate)
 
 ```
 ## Define your theme
