@@ -1,12 +1,14 @@
 ---
-title: "Assignment 5: Data Visualization"
+title: 'Assignment 5: Data Visualization'
 author: "Nagarajan Vaidya Subramanian"
 date: "Spring 2023"
-output: pdf_document
+output:
+  word_document: default
+  pdf_document: default
 geometry: margin=2.54cm
 fig_height: 3
 fig_width: 4
-editor_options: 
+editor_options:
   chunk_output_type: inline
 ---
 
@@ -66,7 +68,15 @@ litter$collectDate <- ymd(litter$collectDate)
 
 ```{r build plot theme}
 #3
-
+my_theme <- theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_text(colour = "#440000"),
+    plot.title = element_text(colour = "blue",
+                              family = "Times"),
+    axis.title = element_text(colour = "#4169e1",
+                              family = "Times")
+  )
 ```
 
 ## Create graphs
@@ -74,9 +84,38 @@ For numbers 4-7, create ggplot graphs and adjust aesthetics to follow best pract
 
 4. [NTL-LTER] Plot total phosphorus (`tp_ug`) by phosphate (`po4`), with separate aesthetics for Peter and Paul lakes. Add a line of best fit and color it black. Adjust your axes to hide extreme values (hint: change the limits using `xlim()` and/or `ylim()`).
 
-```{r plot total P vs PO4}
-#4 
+```{r plot total P vs PO4, fig.align='center'}
+#4
+ntl_litter %>%
+  ggplot(aes(x=po4,
+                 y=tp_ug,
+                 color=lakename)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  xlim(0, 50) +
+  ylim(0, 150) +
+  labs(x = "Phosphate",
+       y = "Total Phosphorous (in ug)") +
+  my_theme
+```
 
+
+```{r log plot total P vs PO4, fig.align='center'}
+#creating a log-log plot to visualise the data because it is very skewed
+ntl_litter %>%
+  ggplot(aes(x=po4,
+                 y=tp_ug,
+                 color=lakename)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  xlim(0, 50) +
+  ylim(0, 150) +
+  scale_x_log10() +
+  scale_y_log10() +
+  labs(x = "Log Phosphate",
+       y = "Log Total Phosphorous (in ug)") +
+  ylim(0.5,120) +
+  my_theme
 ```
 
 
@@ -84,9 +123,58 @@ For numbers 4-7, create ggplot graphs and adjust aesthetics to follow best pract
 
 Tip: R has a build in variable called `month.abb` that returns a list of months;see <https://r-lang.com/month-abb-in-r-with-example>
 
-```{r Create boxplots}
+```{r Create boxplots, fig.align='center'}
 #5 
+#Changing the format of the month column in the dataframe to Date so that it acts as categories for later plots
+ntl_litter$month <- month(ntl_litter$month, label=TRUE)
+#ntl_litter$year4 <- year(ntl_litter$year4)
 
+plot_temperature <- 
+  ntl_litter %>%
+  group_by(month) %>%
+  ggplot(mapping = aes(color=lakename)) +
+    geom_boxplot(mapping=aes(x = month,
+                             y = temperature_C)) +
+    my_theme +
+    labs(x = "Month",
+         y = "Temperature / deg. C")
+
+plot_tp <- 
+  ntl_litter %>%
+  group_by(month) %>%
+  ggplot(mapping = aes(color=lakename)) +
+    geom_boxplot(mapping=aes(x = month,
+                             y = tp_ug)) +
+    my_theme +
+    labs(x = "Month",
+         y = "Total Phosphorous / ug")
+
+plot_tn <-
+  ntl_litter %>%
+    group_by(month) %>%
+    ggplot(mapping = aes(color=lakename)) +
+    geom_boxplot(mapping=aes(x = month,
+                             y = tn_ug)) +
+    my_theme +
+    labs(x = "Month",
+         y = "Total Nitrogen / ug")
+
+#first creating a combined plot of all three boxplots but without their legends
+combined_plot <- plot_grid(plot_temperature + theme(legend.position = "none"), 
+                           plot_tp + theme(legend.position = "none"), 
+                           plot_tn + theme(legend.position = "none"),
+                           axis = "b",
+                           nrow = 3,
+                           align = 'h')
+
+#creating a separate "plot" of the legend alone. Then combining it with our combined plot of the three boxplots
+legend <- get_legend(plot_temperature)
+
+#creating a cowplot with the combined boxplots and a common legend. The things we do for want of built-in functionality
+my_cowplot <- plot_grid(combined_plot, legend,
+                        ncol = 1,
+                        rel_heights = c(1, 0.1))
+my_cowplot
 ```
 
 Question: What do you observe about the variables of interest over seasons and between lakes? 
@@ -97,14 +185,32 @@ Question: What do you observe about the variables of interest over seasons and b
 
 7. [Niwot Ridge] Now, plot the same plot but with NLCD classes separated into three facets rather than separated by color. 
 
-```{r Plot litter}
+```{r Plot litter, fig.align='center'}
 #6
-
+litter %>%
+  filter(functionalGroup == "Needles") %>%
+  ggplot(mapping = aes(x = collectDate,
+                       y = dryMass,
+                       colour = nlcdClass)) +
+    geom_point() +
+    labs(x = "Date of collection",
+         y = "Dry Mass",
+         title = "Quantity of Needles collected from different sites") +
+    my_theme
 
 #7
-
+litter %>%
+  filter(functionalGroup == "Needles") %>%
+  ggplot(mapping = aes(x = collectDate,
+                       y = dryMass)) +
+    geom_point() +
+    labs(x = "Date of collection",
+         y = "Dry Mass",
+         title = "Faceted plot of Needles collected from different sites") +
+    facet_grid(. ~ nlcdClass) +
+    theme_light()
 
 ```
 Question: Which of these plots (6 vs. 7) do you think is more effective, and why? 
 
-> Answer:
+> Answer: I think the faceted plot is more effective at conveying the quantity of needles collected from different sites at different dates. This is because in the Cowplot, the points from the three locations overlap and it becomes hard to understand the distribution of mass across different NLCD classes. Whereas in the facet plot, the masses are plotted on separate windows which makes their relative distributions easier to visualise.

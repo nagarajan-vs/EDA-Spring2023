@@ -228,7 +228,13 @@ Exercise: build your own scatterplots of PeterPaul.chem.nutrients
 # Plot surface temperatures by day of  year. 
 # Color your points by year, and facet by lake in two rows.
 # Change the ylab name
-
+PeterPaul.chem.nutrients %>%
+  filter(depth==0) %>%
+  ggplot(aes(x=daynum, y=temperature_C, color=year4))+
+    geom_point() +
+    theme_minimal() +
+    scale_fill_brewer(type = "qual",
+                      palette = "Pastel1")
 
 #2. 
 # Plot temperature by date. Color your points by depth.
