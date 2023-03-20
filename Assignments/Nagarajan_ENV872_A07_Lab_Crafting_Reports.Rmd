@@ -3,6 +3,7 @@ title: 'A07 - Crafting Reports'
 author: "Nagarajan Vaidya Subramanian" 
 date: "Spring 2023"
 output: pdf_document
+toc: true
 ---
 
 ## Objectives:
